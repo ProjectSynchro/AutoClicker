@@ -64,7 +64,7 @@ class Frame1(wx.Frame):
     def __set_properties(self):
         self.SetTitle("AutoClicker")
         self.SetSize((300, 100))
-        self.SetBackgroundColour("white")
+        self.SetBackgroundColour('#DCDCDC')
         
     def regHotKey(self):
         """
