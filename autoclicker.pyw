@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import wx
 import win32api
 import win32con #for the VK keycodes
@@ -6,7 +9,7 @@ import time
 EVT_RESULT_ID = wx.NewId()
 
 def mouseClick(timer):
-    print "Click!"
+    print("Click!")
     x,y = win32api.GetCursorPos()
     win32api.SetCursorPos((x, y))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0) 
@@ -41,7 +44,7 @@ class WorkerThread(Thread):
                 wx.PostEvent(self._notify_window, ResultEvent(None))
                 return
             mouseClick(self.timer)
-            print self.timer
+            print(self.timer)
         
     def abort(self):
         self._want_abort = True
@@ -56,7 +59,7 @@ class Frame1(wx.Frame):
         self.__set_properties()
         self.regHotKey()
         self.Bind(wx.EVT_HOTKEY, self.handleHotKey, id=self.hotKeyId)
-        self.slider1 = wx.Slider(self, -1, 1, 1, 10000, (10, 10), (300, 50),
+        self.slider1 = wx.Slider(self, -1, 1, 1, 10000, (10, 10), (300, 100),
             wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)
     def __set_properties(self):
         self.SetTitle("AutoClicker")
@@ -79,7 +82,7 @@ class Frame1(wx.Frame):
         else:
             self.worker.abort()
             self.worker = None
-        print self.autoClick
+        print(self.autoClick)
 
 class AutoClicker(wx.App):
     def OnInit(self):
