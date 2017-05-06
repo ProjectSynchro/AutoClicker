@@ -22,15 +22,19 @@ def EVT_RESULT(win, func):
     win.Connect(-1, -1, EVT_RESULT_ID, func)
     
 class ResultEvent(wx.PyEvent):
+	
     """Simple event to carry arbitrary result data."""
     def __init__(self, data):
+		
         """Init Result Event."""
         wx.PyEvent.__init__(self)
         self.SetEventType(EVT_RESULT_ID)
         self.data = data
         
 class WorkerThread(Thread):
-    '''Worker Thread Class.'''
+	
+    #Worker Thread Class.
+    
     def __init__(self, notify_window, timer):
         Thread.__init__(self)
         self._notify_window = notify_window
@@ -67,9 +71,11 @@ class Frame1(wx.Frame):
         self.SetBackgroundColour('#DCDCDC')
         
     def regHotKey(self):
+		
         """
         This function registers the hotkey Alt+F1 with id=100
         """
+        
         self.hotKeyId = 100
         self.RegisterHotKey(
             self.hotKeyId, #a unique ID for this hotkey
