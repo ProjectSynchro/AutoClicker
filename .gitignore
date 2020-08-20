@@ -28,7 +28,8 @@ nosetests.xml
 # Translations
 *.mo
 
-# Mr Developer
+# IDE Files
 .mr.developer.cfg
 .project
 .pydevproject
+.vscode
