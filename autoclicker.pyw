@@ -2,20 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import wx
-import win32api
-import win32con #for the VK keycodes
+import pyautogui
 from threading import *
 import time
 EVT_RESULT_ID = wx.NewId()
 
 def mouseClick(timer):
     print("Click!")
-    x,y = win32api.GetCursorPos()
-    win32api.SetCursorPos((x, y))
-    win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,x,y,0,0) 
-    time.sleep(timer) 
-    win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,x,y,0,0) 
-    time.sleep(timer) 
+    x, y = pyautogui.position()
+    pyautogui.moveTo(x, y)
+    pyautogui.mouseDown(button='right')
+    sleep(timer)
+    pyautogui.mouseUp(button='right')
+    sleep(timer)
 
 def EVT_RESULT(win, func):
     """Define Result Event."""
