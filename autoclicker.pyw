@@ -1,46 +1,52 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import wx
 import pyautogui
-from threading import *
 import time
+
+from threading import *
+from wx import *
+
 EVT_RESULT_ID = wx.NewId()
+
 
 def mouseClick(timer):
     print("Click!")
     x, y = pyautogui.position()
     pyautogui.moveTo(x, y)
     pyautogui.mouseDown(button='right')
-    sleep(timer)
+    time.sleep(timer)
     pyautogui.mouseUp(button='right')
-    sleep(timer)
+    time.sleep(timer)
+
 
 def EVT_RESULT(win, func):
     """Define Result Event."""
     win.Connect(-1, -1, EVT_RESULT_ID, func)
-    
+
+
 class ResultEvent(wx.PyEvent):
-	
+
     """Simple event to carry arbitrary result data."""
+
     def __init__(self, data):
-		
         """Init Result Event."""
         wx.PyEvent.__init__(self)
         self.SetEventType(EVT_RESULT_ID)
         self.data = data
-        
+
+
 class WorkerThread(Thread):
-	
-    #Worker Thread Class.
-    
+
+    # Worker Thread Class.
+
     def __init__(self, notify_window, timer):
         Thread.__init__(self)
         self._notify_window = notify_window
         self._want_abort = False
         self.timer = timer
         self.start()
-        
+
     def run(self):
         while True:
             if self._want_abort:
@@ -48,7 +54,7 @@ class WorkerThread(Thread):
                 return
             mouseClick(self.timer)
             print(self.timer)
-        
+
     def abort(self):
         self._want_abort = True
 
@@ -56,38 +62,41 @@ class WorkerThread(Thread):
 class Frame1(wx.Frame):
     def __init__(self, *args, **kwargs):
         wx.Frame.__init__(self, *args, **kwargs)
-        
+
         self.autoClick = False
         self.worker = None
         self.__set_properties()
         self.regHotKey()
         self.Bind(wx.EVT_HOTKEY, self.handleHotKey, id=self.hotKeyId)
         self.slider1 = wx.Slider(self, -1, 1, 1, 10000, (10, 10), (300, 100),
-            wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)
+                                 wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)
+
     def __set_properties(self):
         self.SetTitle("AutoClicker")
         self.SetSize((300, 100))
         self.SetBackgroundColour('#DCDCDC')
-        
+
     def regHotKey(self):
-		
         """
         This function registers the hotkey Alt+F1 with id=100
         """
-        
+
         self.hotKeyId = 100
         self.RegisterHotKey(
-            self.hotKeyId, #a unique ID for this hotkey
-            win32con.MOD_ALT, #the modifier key
-            win32con.VK_F1) #the key to watch for
+            self.hotKeyId,  # a unique ID for this hotkey
+            win32con.MOD_ALT,  # the modifier key
+            win32con.VK_F1)  # the key to watch for
+
     def handleHotKey(self, evt):
         self.autoClick = not self.autoClick
         if self.autoClick:
-            self.worker = WorkerThread(self, float(1/float(self.slider1.GetValue())))
+            self.worker = WorkerThread(self, float(
+                1/float(self.slider1.GetValue())))
         else:
             self.worker.abort()
             self.worker = None
         print(self.autoClick)
+
 
 class AutoClicker(wx.App):
     def OnInit(self):
@@ -95,6 +104,7 @@ class AutoClicker(wx.App):
         self.SetTopWindow(frame1)
         frame1.Show()
         return 1
+
 
 autoClicker = AutoClicker(0)
 autoClicker.MainLoop()
