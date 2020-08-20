@@ -1,2 +1,2 @@
-PyAutoGUI==0.9.50
-wxPython==4.1.0
+PyAutoGUI>=0.9.50
+wxPython>=4.1.0
