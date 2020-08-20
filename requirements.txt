@@ -1,2 +1,2 @@
-pypiwin32==220
-wxPython==4.0.0a2.dev3038+953a2e5
+PyAutoGUI==0.9.50
+wxPython==4.1.0
