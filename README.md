@@ -15,4 +15,4 @@ Requires wxPython and pyautogui
 Use `pip` to install the `wxPython` and `pyautogui` libraries.
 - Install the dependancies with the following commands:
   - Locally: `pip install --user -r requirements.txt`
-  - System-wide: `pip install -r requirements.txt`
+  - System-wide (Run as root or as Admin): `pip install -r requirements.txt`
