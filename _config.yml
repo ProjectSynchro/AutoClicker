@@ -1,1 +1,8 @@
+title: AutoClicker
+description: Simple auto-clicker written in Python. Uses wxWidgets for GUI and pyautogui for handling inputs.
+google_analytics: 
+show_downloads: true
 theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
