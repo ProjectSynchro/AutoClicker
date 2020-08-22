@@ -11,9 +11,7 @@ The GUI features a slider that allows you to change the CPS (clicks per second)
   
 ### Dependancies
 Requires wxPython and pypiWin32
-
-Use `pip` to install the `wxPython` and `pypiwin32` libraries.
+Use `pip` to install the `wxPython` and `pyautogui` libraries.
 - Install the dependancies with the following commands:
-  - Windows: `pip.exe install wxPython pypiwin32`
-  - Linux: `sudo pip install wxPython pypiwin32`
-  - Mac: `sudo pip install wxPython pypiwin32`
+  - Locally: `pip install --user -r requirements.txt`
+  - System-wide (Run as root or as Admin): `pip install -r requirements.txt`
